@@ -1,6 +1,7 @@
 #pragma once
 #include"KamataEngine.h"
 #include "Player.h"
+#include <vector>
 
 //ゲームシーン
 class GameScene
@@ -31,5 +32,14 @@ class GameScene
 
 		// 自キャラ
 	    Player* player_ = nullptr;
+
+		// ブロック用ワールドトランスフォームの配列バージョン
+		std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
+
+		//デバックカメラ有効
+	    bool isDebugCameraActive_ = false;
+
+		//デバックカメラ
+	    KamataEngine::DebugCamera* debugcamera_ = nullptr;
 
 };
