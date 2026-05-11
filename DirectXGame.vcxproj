@@ -165,7 +165,6 @@
   <ItemGroup>
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mathAfin.cpp" />
     <ClCompile Include="MathUtility.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
