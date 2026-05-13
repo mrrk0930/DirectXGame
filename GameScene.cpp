@@ -13,6 +13,9 @@ void GameScene::Initialize() {
 	// 3Dモデルの生成
 	model_ = Model::Create();
 
+	//3Dモデルの生成
+	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
+
 	// カメラの初期化
 	camera_.Initialize();
 
@@ -24,6 +27,12 @@ void GameScene::Initialize() {
 
 	// 自キャラの初期化
 	player_->Initialize(model_, textureHandle_, &camera_);
+
+	// 天球生成
+	skydome_ = new Skydome();
+
+	// 天球初期化
+	skydome_->Initialize(modelSkydome_, &camera_);
 
 	// 要素数
 	const uint32_t kNumBlockVirtical = 10;
@@ -69,6 +78,9 @@ void GameScene::Update() {
 	// 自キャラの更新
 	player_->Update();
 
+	// 天球更新
+	skydome_->Update();
+
 	// デバックカメラの更新
 	debugcamera_->Update();
 
@@ -77,7 +89,7 @@ void GameScene::Update() {
 	if (Input::GetInstance()->TriggerKey(DIK_K)) {
 
 		// デバックカメラ有効フラグをトグル
-		isDebugCameraActive_ = true;
+		isDebugCameraActive_ = !isDebugCameraActive_;
 	}
 
 #endif
@@ -116,6 +128,9 @@ void GameScene::Draw() {
 	// 3Dモデルの描画前処理
 	Model::PreDraw();
 
+	// 天球描画
+	skydome_->Draw();
+
 	// 自キャラの描画
 	player_->Draw();
 
@@ -140,6 +155,14 @@ GameScene::~GameScene() {
 	// 3Dモデルデータの開放
 	delete model_;
 	model_ = nullptr;
+
+	// 3Dモデルデータの開放
+	delete modelSkydome_;
+	modelSkydome_ = nullptr;
+
+	// 天球解放
+	delete skydome_;
+	skydome_ = nullptr;
 
 	// 自キャラの開放
 	delete player_;

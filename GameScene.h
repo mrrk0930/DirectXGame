@@ -1,6 +1,7 @@
 #pragma once
 #include "KamataEngine.h"
 #include "Player.h"
+#include "Skydome.h"
 #include <vector>
 
 // ゲームシーン
@@ -24,12 +25,16 @@ public:
 
 	// 3Dモデル
 	KamataEngine::Model* model_ = nullptr;
+	KamataEngine::Model* modelSkydome_ = nullptr;
 
 	// カメラ
 	KamataEngine::Camera camera_;
 
 	// 自キャラ
 	Player* player_ = nullptr;
+
+	// 天球
+	Skydome* skydome_ = nullptr;
 
 	// ブロック用ワールドトランスフォームの配列バージョン
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
