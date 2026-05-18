@@ -3,16 +3,18 @@
 
 using namespace KamataEngine;
 
-void Skydome::Initialize(Model* model, Camera* camera) 
-{
+void Skydome::Initialize(Model* model, Camera* camera) {
 
 	
+	model_ = model;
+
+	camera_ = camera;
+
 	// ワールド変換初期化
 	worldTransform_.Initialize();
 
-
+	
 }
-
 void Skydome::Update() 
 {
 

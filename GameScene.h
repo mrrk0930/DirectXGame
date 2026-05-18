@@ -21,10 +21,12 @@ public:
 	~GameScene();
 
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0;
+	uint32_t blockTextureHandle_ = 0;
+	uint32_t playerTextureHandle_ = 0;
 
 	// 3Dモデル
-	KamataEngine::Model* model_ = nullptr;
+	KamataEngine::Model* modelPlayer_ = nullptr;
+	KamataEngine::Model* modelBlock_ = nullptr;
 	KamataEngine::Model* modelSkydome_ = nullptr;
 
 	// カメラ

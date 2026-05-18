@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "cassert"
+#include "MathUtility.h"
+#include "WorldMatrixF.h"
 
 using namespace KamataEngine;
 
@@ -23,8 +25,8 @@ void Player::Update() {
 
 	// インゲームの更新処理
 
-	// 行列を定数バッファに転送
-	worldTransform_.TransferMatrix();
+		// アフィン変換行列を計算してメンバ変数に代入
+	UpdateWorldTransform(worldTransform_);
 }
 
 void Player::Draw() {

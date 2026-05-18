@@ -8,16 +8,29 @@ void GameScene::Initialize() {
 	// インゲームの初期化処理
 
 	// ファイル名を指定してテクスチャ読み込む
-	textureHandle_ = TextureManager::Load("cube/cube.jpg");
+	blockTextureHandle_ = TextureManager::Load("block/block.png");
+	playerTextureHandle_ = TextureManager::Load("player/player.png");
 
 	// 3Dモデルの生成
-	model_ = Model::Create();
+	//model_ = Model::Create();
 
-	//3Dモデルの生成
+	// プレイヤーモデル生成
+	modelPlayer_ = Model::CreateFromOBJ("player", true);
+
+	// ブロックモデル生成
+	modelBlock_ = Model::CreateFromOBJ("block", true);
+
+	// 天球モデル生成
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	// カメラの初期化
 	camera_.Initialize();
+
+	// farZを変更
+	camera_.farZ = 2000.0f;
+
+	// 行列更新
+	camera_.UpdateMatrix();
 
 	// デバックカメラの生成
 	debugcamera_ = new DebugCamera(1080, 720);
@@ -26,7 +39,7 @@ void GameScene::Initialize() {
 	player_ = new Player();
 
 	// 自キャラの初期化
-	player_->Initialize(model_, textureHandle_, &camera_);
+	player_->Initialize(modelPlayer_, playerTextureHandle_, &camera_);
 
 	// 天球生成
 	skydome_ = new Skydome();
@@ -142,7 +155,7 @@ void GameScene::Draw() {
 			if (!worldTransformBlock)
 				continue;
 
-			model_->Draw(*worldTransformBlock, camera_, textureHandle_);
+			modelBlock_->Draw(*worldTransformBlock, camera_, blockTextureHandle_);
 		}
 	}
 
@@ -153,10 +166,16 @@ void GameScene::Draw() {
 GameScene::~GameScene() {
 
 	// 3Dモデルデータの開放
-	delete model_;
-	model_ = nullptr;
+	//delete model_;
+	//model_ = nullptr;
 
 	// 3Dモデルデータの開放
+	delete modelPlayer_;
+	modelPlayer_ = nullptr;
+
+	delete modelBlock_;
+	modelBlock_ = nullptr;
+
 	delete modelSkydome_;
 	modelSkydome_ = nullptr;
 
