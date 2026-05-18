@@ -12,6 +12,7 @@ void Player::Initialize(KamataEngine::Model* model, uint32_t textureHandle, Kama
 	// NULLポインタチャック
 	assert(model);
 
+
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	textureHandle_ = textureHandle;
